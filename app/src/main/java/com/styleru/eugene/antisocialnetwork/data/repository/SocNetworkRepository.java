@@ -20,6 +20,7 @@ import retrofit2.Response;
 public class SocNetworkRepository implements ISocNetworkRepository {
 
     private SocNetworkApi socNetworkApi;
+    private final String ERROR_MESSAGE = "No internet connection!";
 
     @Inject
     public SocNetworkRepository(SocNetworkApi socNetworkApi) {
@@ -36,7 +37,7 @@ public class SocNetworkRepository implements ISocNetworkRepository {
 
             @Override
             public void onFailure(Call<Post> call, Throwable t) {
-                failure.onFailure(t.getMessage());
+                failure.onFailure(ERROR_MESSAGE);
             }
         });
     }
@@ -51,7 +52,7 @@ public class SocNetworkRepository implements ISocNetworkRepository {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                failure.onFailure(t.getMessage());
+                failure.onFailure(ERROR_MESSAGE);
             }
         });
     }
@@ -67,7 +68,7 @@ public class SocNetworkRepository implements ISocNetworkRepository {
 
             @Override
             public void onFailure(Call<List<Comment>> call, Throwable t) {
-                failure.onFailure(t.getMessage());
+                failure.onFailure(ERROR_MESSAGE);
             }
         });
     }
