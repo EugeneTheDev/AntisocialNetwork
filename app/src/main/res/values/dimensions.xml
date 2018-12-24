@@ -5,10 +5,17 @@
 
     <dimen name="fab_margin">16dp</dimen>
 
+    <dimen name="author_size">15dp</dimen>
+    <dimen name="plain_text_size">14dp</dimen>
+
     <dimen name="post_margin">3dp</dimen>
-    <dimen name="post_author_size">15dp</dimen>
-    <dimen name="post_text_size">14dp</dimen>
+
+
     <dimen name="post_corner_rad">4dp</dimen>
+    <dimen name="post_title_padding">15dp</dimen>
+    <dimen name="post_title_size">16dp</dimen>
 
     <dimen name="progress_bar_size">50dp</dimen>
+
+    <dimen name="comment_padding">20dp</dimen>
 </resources>

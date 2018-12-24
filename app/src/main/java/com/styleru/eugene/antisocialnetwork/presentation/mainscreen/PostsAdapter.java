@@ -31,7 +31,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
     }
 
-    public void addNewPost(Post newPost){
+    public void addPost(Post newPost){
         if (newPost.getId() == posts.size()) {
             posts.add(newPost);
             notifyItemInserted(posts.size() - 1);
@@ -62,10 +62,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         User user = post.getUser();
         viewHolder.authorName.setText(String.format("%s (%s)", user.getName(), user.getUsername()));
         viewHolder.authorEmail.setText(user.getEmail());
+        viewHolder.postTitle.setText(post.getTitle());
         viewHolder.postText.setText(post.getBody());
+        viewHolder.itemView.setOnClickListener(v->mainScreenPresenter.viewPostComments(post));
 
         if (posts.size() - i - 1 <= VISIBILITY_THRESHOLD)
-            mainScreenPresenter.requestNewPost(posts.size());
+            mainScreenPresenter.requestPost(posts.size());
 
 
     }
@@ -76,12 +78,13 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView authorName, authorEmail, postText;
+        private TextView authorName, authorEmail, postTitle, postText;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             authorName = itemView.findViewById(R.id.post_author_name);
             authorEmail = itemView.findViewById(R.id.post_author_email);
+            postTitle = itemView.findViewById(R.id.post_title);
             postText = itemView.findViewById(R.id.post_text);
 
         }

@@ -18,7 +18,7 @@ public class PostsInteractor {
         this.socNetworkRepository = socNetworkRepository;
     }
 
-    public void requestNewPosts(int postId, Success<Post> success, Failure failure){
+    public void requestPosts(int postId, Success<Post> success, Failure failure){
         socNetworkRepository.requestPost(postId,
                 (post)->addUserToPost(post.getUserId(), post, success, failure), failure);
     }

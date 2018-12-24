@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Antisocial Network</string>
     <string name="main_toolbar_title">Posts</string>
+    <string name="comments_toolbar_title">Comments</string>
 </resources>

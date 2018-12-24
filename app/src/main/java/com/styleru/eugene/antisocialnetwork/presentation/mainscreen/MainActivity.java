@@ -1,14 +1,13 @@
 package com.styleru.eugene.antisocialnetwork.presentation.mainscreen;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -16,6 +15,9 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.styleru.eugene.antisocialnetwork.AntisocialNetworkApp;
 import com.styleru.eugene.antisocialnetwork.R;
 import com.styleru.eugene.antisocialnetwork.domain.entity.Post;
+import com.styleru.eugene.antisocialnetwork.presentation.commentsscreen.CommentsActivity;
+
+import org.parceler.Parcels;
 
 import javax.inject.Inject;
 
@@ -25,8 +27,7 @@ import butterknife.OnClick;
 
 public class MainActivity extends MvpAppCompatActivity implements MainView {
 
-    @BindView(R.id.main_toolbar)
-    Toolbar toolbar;
+    public static final String POST_KEY = "post";
 
     @BindView(R.id.posts_recycler_view)
     RecyclerView recyclerView;
@@ -76,14 +77,21 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     }
 
     @Override
-    public void addNewPost(Post newPost){
-        postsAdapter.addNewPost(newPost);
+    public void addPost(Post newPost){
+        postsAdapter.addPost(newPost);
     }
 
     @Override
     public void setProgressVisibility(boolean isVisible) {
         if (isVisible) progressBar.setVisibility(View.VISIBLE);
         else progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void viewPostComments(Post post) {
+        Intent intent = new Intent(getApplicationContext(), CommentsActivity.class);
+        intent.putExtra(POST_KEY, Parcels.wrap(post));
+        startActivity(intent);
     }
 
     @Override

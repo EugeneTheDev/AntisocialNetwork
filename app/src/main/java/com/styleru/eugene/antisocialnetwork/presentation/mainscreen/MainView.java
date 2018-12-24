@@ -14,11 +14,14 @@ public interface MainView extends MvpView {
     void showErrorPopup(String message);
 
     @StateStrategyType(OneExecutionStateStrategy.class)
-    void addNewPost(Post newPosts);
+    void addPost(Post newPosts);
 
     @StateStrategyType(OneExecutionStateStrategy.class)
     void fillOnStart(Post post, int goalSize);
 
     @StateStrategyType(AddToEndSingleStrategy.class)
     void setProgressVisibility(boolean visibility);
+
+    @StateStrategyType(OneExecutionStateStrategy.class)
+    void viewPostComments(Post post);
 }

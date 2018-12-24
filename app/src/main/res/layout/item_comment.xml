@@ -1,64 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/post_margin"
-    android:layout_marginBottom="@dimen/post_margin"
-    android:foreground="?android:attr/selectableItemBackground"
-    android:clickable="true"
-    card_view:cardCornerRadius="@dimen/post_corner_rad">
+    android:paddingBottom="@dimen/comment_padding"
+    android:background="@android:color/white"
+    android:foreground="?attr/selectableItemBackground"
+    android:clickable="true">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/post_author_name"
+            android:id="@+id/comment_author_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/post_margin"
             android:paddingEnd="@dimen/post_margin"
             android:textAppearance="@style/AuthorTextStyle"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Clementine Bauch (Samantha)"/>
+            tools:text="id labore ex et quam laborum"/>
 
         <TextView
-            android:id="@+id/post_author_email"
+            android:id="@+id/comment_author_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/post_margin"
             android:paddingEnd="@dimen/post_margin"
             android:textAppearance="@style/AuthorTextStyle"
-            app:layout_constraintTop_toBottomOf="@id/post_author_name"
-            tools:text="Nathan@yesenia.net"/>
+            app:layout_constraintTop_toBottomOf="@id/comment_author_name"
+            tools:text="Eliseo@gardner.biz"/>
 
         <TextView
-            android:id="@+id/post_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/post_title_padding"
-            android:textAppearance="@style/TitleStyle"
-            app:layout_constraintBottom_toTopOf="@id/post_text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/post_author_email"
-            tools:text="Title"/>
-
-        <TextView
-            android:id="@+id/post_text"
+            android:id="@+id/comment_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/post_margin"
             android:textAppearance="@style/TextStyle"
-            app:layout_constraintTop_toBottomOf="@id/post_title"
+            app:layout_constraintTop_toBottomOf="@id/comment_author_email"
             tools:text="Hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"/>
 
     </android.support.constraint.ConstraintLayout>
 
+</FrameLayout>
 
-
-</android.support.v7.widget.CardView>

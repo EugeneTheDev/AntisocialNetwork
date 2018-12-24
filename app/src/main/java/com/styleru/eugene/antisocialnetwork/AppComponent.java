@@ -3,6 +3,7 @@ package com.styleru.eugene.antisocialnetwork;
 import android.content.Context;
 
 import com.styleru.eugene.antisocialnetwork.modules.NetworkModule;
+import com.styleru.eugene.antisocialnetwork.presentation.commentsscreen.CommentsActivity;
 import com.styleru.eugene.antisocialnetwork.presentation.mainscreen.MainActivity;
 
 
@@ -16,6 +17,7 @@ import dagger.Component;
 public interface AppComponent {
 
     void inject(MainActivity mainActivity);
+    void inject(CommentsActivity commentsActivity);
 
     @Component.Builder
     interface Builder {

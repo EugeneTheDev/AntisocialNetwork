@@ -2,6 +2,7 @@ package com.styleru.eugene.antisocialnetwork.presentation.mainscreen;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.styleru.eugene.antisocialnetwork.domain.entity.Post;
 import com.styleru.eugene.antisocialnetwork.domain.interactor.PostsInteractor;
 
 import javax.inject.Inject;
@@ -18,8 +19,8 @@ public class MainScreenPresenter extends MvpPresenter<MainView> {
         this.postsInteractor = postsInteractor;
     }
 
-    public void requestNewPost(int startId){
-        postsInteractor.requestNewPosts(startId, getViewState()::addNewPost,
+    public void requestPost(int postId){
+        postsInteractor.requestPosts(postId, getViewState()::addPost,
                 getViewState()::showErrorPopup);
 
     }
@@ -27,17 +28,17 @@ public class MainScreenPresenter extends MvpPresenter<MainView> {
     public void fillOnStart(){
         int goalSize = 20;
         for (int i = 0; i < goalSize; i++) {
-            postsInteractor.requestNewPosts(i + 1,
+            postsInteractor.requestPosts(i + 1,
                     (post) ->getViewState().fillOnStart(post, goalSize), getViewState()::showErrorPopup);
         }
     }
 
-    public void hideProgressBar(){
-        getViewState().setProgressVisibility(false);
+    public void viewPostComments(Post post){
+        getViewState().viewPostComments(post);
     }
 
-    public void test(String message){
-        getViewState().showErrorPopup(message);
+    public void hideProgressBar(){
+        getViewState().setProgressVisibility(false);
     }
 
 }

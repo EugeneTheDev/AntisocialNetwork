@@ -2,6 +2,9 @@ package com.styleru.eugene.antisocialnetwork.domain.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class User {
     @SerializedName("id")
     private int id;

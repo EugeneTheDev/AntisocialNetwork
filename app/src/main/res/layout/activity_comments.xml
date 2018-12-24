@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.mainscreen.MainActivity">
+    tools:context=".presentation.commentsscreen.CommentsActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -22,35 +22,24 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/ToolbarTextStyle"
                 android:layout_gravity="center"
-                android:text="@string/main_toolbar_title"/>
+                android:text="@string/comments_toolbar_title"/>
 
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btn_new_post"
-        android:src="@drawable/ic_new_post"
-        android:background="?attr/selectableItemBackground"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="@dimen/fab_margin"
-        app:fabSize="normal" />
-
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/posts_recycler_view"
+        android:id="@+id/comments_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/recycler_background"
         android:layout_gravity="center"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_post"/>
+        tools:listitem="@layout/item_comment"/>
 
     <ProgressBar
-        android:id="@+id/posts_loader"
+        android:id="@+id/comments_loader"
         android:layout_width="@dimen/progress_bar_size"
         android:layout_height="@dimen/progress_bar_size"
         android:layout_gravity="center"/>

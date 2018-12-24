@@ -8,6 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ToolbarStyle" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:elevation">@dimen/toolbar_elevation</item>
+    </style>
+
+
     <style name="ToolbarTextStyle" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/toolbar_text_color</item>
         <item name="android:textSize">@dimen/toolbar_text_size</item>
@@ -15,16 +21,21 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="PostAuthorTextStyle" parent="TextAppearance.AppCompat">
+    <style name="AuthorTextStyle" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/post_author_color</item>
-        <item name="android:textSize">@dimen/post_author_size</item>
+        <item name="android:textSize">@dimen/author_size</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="PostTextStyle" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/post_text_color</item>
-        <item name="android:textSize">@dimen/post_text_size</item>
+    <style name="TextStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/plain_text_size</item>
     </style>
 
+    <style name="TitleStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/post_title_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
 </resources>

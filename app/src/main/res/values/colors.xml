@@ -5,7 +5,5 @@
     <color name="colorAccent">#D81B60</color>
     <color name="toolbar_text_color">#dfdfdf</color>
     <color name="post_author_color">#010053</color>
-    <color name="post_text_color">#000000</color>
     <color name="recycler_background">#bcaaa4</color>
-    <color name="post_color">#ffffff</color>
 </resources>
