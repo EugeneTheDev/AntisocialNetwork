@@ -10,6 +10,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface SocNetworkApi {
 
@@ -21,7 +22,7 @@ public interface SocNetworkApi {
     @GET("users/{id}")
     Call<User> getUser(@Path("id") int userId);
 
-    @GET("/posts/{id}/comments")
-    Call<List<Comment>> getComments(@Path("id") int postId);
+    @GET("/comments")
+    Call<List<Comment>> getComments(@Query("postId") int postId);
 
 }

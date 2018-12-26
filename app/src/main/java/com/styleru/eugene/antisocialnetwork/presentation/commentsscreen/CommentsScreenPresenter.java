@@ -26,4 +26,8 @@ public class CommentsScreenPresenter extends MvpPresenter<CommentsView> {
     public void hideProgressBar(){
         getViewState().setProgressVisibility(false);
     }
+
+    public void showProgressBar(){
+        getViewState().setProgressVisibility(true);
+    }
 }

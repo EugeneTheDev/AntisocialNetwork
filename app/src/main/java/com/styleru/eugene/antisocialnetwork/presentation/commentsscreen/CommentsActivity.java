@@ -54,7 +54,9 @@ public class CommentsActivity extends MvpAppCompatActivity implements CommentsVi
         progressBar.setIndeterminate(true);
         Post post = Parcels.unwrap(getIntent().getParcelableExtra(MainActivity.POST_KEY));
         recyclerView.setAdapter(commentsAdapter);
-        if (commentsAdapter.getItemCount() == 0) {
+        if (!commentsAdapter.checkPost(post)) {
+            commentsScreenPresenter.showProgressBar();
+            commentsAdapter.clearComments();
             commentsAdapter.setPost(post);
             commentsScreenPresenter.requestComments(post.getId());
         }

@@ -37,8 +37,16 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         notifyDataSetChanged();
     }
 
+    public void clearComments(){
+        comments.clear();
+    }
+
     public void setPost(Post post){
         this.post = post;
+    }
+
+    public boolean checkPost(Post post){
+        return this.post != null && this.post.getId() == post.getId();
     }
 
     @Override
