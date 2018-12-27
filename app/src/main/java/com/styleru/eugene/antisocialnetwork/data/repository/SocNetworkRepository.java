@@ -21,6 +21,7 @@ public class SocNetworkRepository implements ISocNetworkRepository {
 
     private SocNetworkApi socNetworkApi;
     private final String ERROR_MESSAGE = "No internet connection!";
+    public static final int MAX_ID = 100;
 
     @Inject
     public SocNetworkRepository(SocNetworkApi socNetworkApi) {
@@ -58,11 +59,26 @@ public class SocNetworkRepository implements ISocNetworkRepository {
     }
 
     @Override
+    public void requestUserByUsername(String username, Result<User> result, Failure failure) {
+        socNetworkApi.getUserByUsername(username).enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                result.onResult(response.body().isEmpty() ? null : response.body().get(0));
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                failure.onFailure(ERROR_MESSAGE);
+            }
+        });
+    }
+
+    @Override
     public void requestComments(int postId, Result<List<Comment>> result, Failure failure) {
         socNetworkApi.getComments(postId).enqueue(new Callback<List<Comment>>() {
             @Override
             public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
-                if (response.body() != null && !response.body().isEmpty())
+                if (response.body() != null)
                     result.onResult(response.body());
             }
 
@@ -73,4 +89,18 @@ public class SocNetworkRepository implements ISocNetworkRepository {
         });
     }
 
+    @Override
+    public void uploadPost(String title, String body, int userId, Result<Post> result, Failure failure) {
+        socNetworkApi.uploadPost(title, body, userId).enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                if (response.body() != null) result.onResult(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                failure.onFailure(ERROR_MESSAGE);
+            }
+        });
+    }
 }

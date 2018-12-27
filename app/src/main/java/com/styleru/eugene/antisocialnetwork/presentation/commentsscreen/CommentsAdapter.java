@@ -18,6 +18,9 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 @Singleton
 public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Comment> comments;
@@ -46,7 +49,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public boolean checkPost(Post post){
-        return this.post != null && this.post.getId() == post.getId();
+        return this.post != null && this.post.equals(post);
     }
 
     @Override
@@ -95,29 +98,41 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
-        return comments.size();
+        return comments.size() + 1;
     }
 
     class PostViewHolder extends RecyclerView.ViewHolder {
-        private TextView authorName, authorEmail, postTitle, postText;
+        @BindView(R.id.post_author_name)
+        TextView authorName;
+
+        @BindView(R.id.post_author_email)
+        TextView authorEmail;
+
+        @BindView(R.id.post_title)
+        TextView postTitle;
+
+        @BindView(R.id.post_text)
+        TextView postText;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
-            authorName = itemView.findViewById(R.id.post_author_name);
-            authorEmail = itemView.findViewById(R.id.post_author_email);
-            postTitle = itemView.findViewById(R.id.post_title);
-            postText = itemView.findViewById(R.id.post_text);
+            ButterKnife.bind(this, itemView);
         }
     }
 
     class CommentViewHolder extends RecyclerView.ViewHolder {
-        private TextView authorName, authorEmail, text;
+        @BindView(R.id.comment_author_name)
+        TextView authorName;
+
+        @BindView(R.id.comment_author_email)
+        TextView authorEmail;
+
+        @BindView(R.id.comment_text)
+        TextView text;
 
         public CommentViewHolder(@NonNull View itemView) {
             super(itemView);
-            authorName = itemView.findViewById(R.id.comment_author_name);
-            authorEmail = itemView.findViewById(R.id.comment_author_email);
-            text = itemView.findViewById(R.id.comment_text);
+            ButterKnife.bind(this, itemView);
         }
     }
 

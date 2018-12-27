@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.styleru.eugene.antisocialnetwork.R;
+import com.styleru.eugene.antisocialnetwork.data.repository.SocNetworkRepository;
 import com.styleru.eugene.antisocialnetwork.domain.entity.Post;
 import com.styleru.eugene.antisocialnetwork.domain.entity.User;
 
@@ -17,6 +18,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 @Singleton
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
@@ -32,9 +36,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     }
 
     public void addPost(Post newPost){
-        if (newPost.getId() == posts.size()) {
+        if (newPost.getId() == posts.get(posts.size() - 1).getId() - 1) {
             posts.add(newPost);
             notifyItemInserted(posts.size() - 1);
+        } else if (newPost.getId() > SocNetworkRepository.MAX_ID){
+            posts.add(0, newPost);
+            notifyDataSetChanged();
         }
 
     }
@@ -42,7 +49,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     public void fillOnStart(Post post, int goalSize){
         posts.add(post);
         if (posts.size() == goalSize){
-            Collections.sort(posts, (el1, el2)->el1.getId() - el2.getId());
+            Collections.sort(posts, (el1, el2)->el2.getId() - el1.getId());
             mainScreenPresenter.hideProgressBar();
             notifyDataSetChanged();
         }
@@ -67,7 +74,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         viewHolder.itemView.setOnClickListener(v->mainScreenPresenter.viewPostComments(post));
 
         if (posts.size() - i - 1 <= VISIBILITY_THRESHOLD)
-            mainScreenPresenter.requestPost(posts.size());
+            mainScreenPresenter.requestPost(posts.get(i).getId()-1);
 
 
     }
@@ -78,15 +85,21 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView authorName, authorEmail, postTitle, postText;
+        @BindView(R.id.post_author_name)
+        TextView authorName;
+
+        @BindView(R.id.post_author_email)
+        TextView authorEmail;
+
+        @BindView(R.id.post_title)
+        TextView postTitle;
+
+        @BindView(R.id.post_text)
+        TextView postText;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            authorName = itemView.findViewById(R.id.post_author_name);
-            authorEmail = itemView.findViewById(R.id.post_author_email);
-            postTitle = itemView.findViewById(R.id.post_title);
-            postText = itemView.findViewById(R.id.post_text);
-
+            ButterKnife.bind(this, itemView);
         }
     }
 }

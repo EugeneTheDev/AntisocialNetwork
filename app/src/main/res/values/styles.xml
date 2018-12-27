@@ -38,4 +38,8 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="Button" parent="ThemeOverlay.AppCompat">
+        <item name="android:colorAccent">@color/colorAccent</item>
+    </style>
+
 </resources>

@@ -2,6 +2,7 @@ package com.styleru.eugene.antisocialnetwork.presentation.mainscreen;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.styleru.eugene.antisocialnetwork.data.repository.SocNetworkRepository;
 import com.styleru.eugene.antisocialnetwork.domain.entity.Post;
 import com.styleru.eugene.antisocialnetwork.domain.interactor.PostsInteractor;
 
@@ -28,7 +29,7 @@ public class MainScreenPresenter extends MvpPresenter<MainView> {
     public void fillOnStart(){
         int goalSize = 20;
         for (int i = 0; i < goalSize; i++) {
-            postsInteractor.requestPosts(i + 1,
+            postsInteractor.requestPosts(SocNetworkRepository.MAX_ID - i,
                     (post) ->getViewState().fillOnStart(post, goalSize), getViewState()::showErrorPopup);
         }
     }
