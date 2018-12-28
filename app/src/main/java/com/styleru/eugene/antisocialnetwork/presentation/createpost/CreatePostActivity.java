@@ -71,6 +71,7 @@ public class CreatePostActivity extends MvpAppCompatActivity implements CreatePo
 
     @Override
     public void result(Post post) {
+        createPostPresenter.setText("", "", "");
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.putExtra(MainActivity.POST_KEY, Parcels.wrap(post));
         setResult(RESULT_OK, intent);

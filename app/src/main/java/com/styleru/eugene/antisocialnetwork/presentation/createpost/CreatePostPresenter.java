@@ -27,7 +27,7 @@ public class CreatePostPresenter extends MvpPresenter<CreatePostView> {
             getViewState().setUsernameError(ERROR_MESSAGE);
             isCorrect = false;
         }
-        if (title == null || username.isEmpty()){
+        if (title == null || title.isEmpty()){
             getViewState().setTitleError(ERROR_MESSAGE);
             isCorrect = false;
         }
