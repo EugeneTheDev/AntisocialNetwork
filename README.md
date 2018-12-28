@@ -1,8 +1,8 @@
 # Antisocial Network
-Android client for non-exising social network
+Android client for non-existing social network
 
 ## Example of working
 ![](example_of_working.gif)
 
 ## Post creation
-![](post-creation.gif)
+![](post_creation.gif)
