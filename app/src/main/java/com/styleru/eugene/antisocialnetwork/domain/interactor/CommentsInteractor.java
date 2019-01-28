@@ -1,9 +1,9 @@
 package com.styleru.eugene.antisocialnetwork.domain.interactor;
 
 import com.styleru.eugene.antisocialnetwork.domain.entity.Comment;
+import com.styleru.eugene.antisocialnetwork.domain.interactor.funcinterfaces.Result;
 import com.styleru.eugene.antisocialnetwork.domain.repository.ISocNetworkRepository;
-import com.styleru.eugene.antisocialnetwork.presentation.funcinterfaces.Failure;
-import com.styleru.eugene.antisocialnetwork.presentation.funcinterfaces.Success;
+import com.styleru.eugene.antisocialnetwork.domain.interactor.funcinterfaces.Failure;
 
 import java.util.List;
 
@@ -16,12 +16,12 @@ public class CommentsInteractor {
     private ISocNetworkRepository socNetworkRepository;
 
     @Inject
-    public CommentsInteractor(ISocNetworkRepository socNetworkRepository) {
+    CommentsInteractor(ISocNetworkRepository socNetworkRepository) {
         this.socNetworkRepository = socNetworkRepository;
     }
 
-    public void requestComments(int postId, Success<List<Comment>> success, Failure failure){
-        socNetworkRepository.requestComments(postId, success::onSuccess, failure);
+    public void requestComments(int postId, Result<List<Comment>> result, Failure failure){
+        socNetworkRepository.requestComments(postId, result, failure);
     }
 
 }

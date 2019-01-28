@@ -17,11 +17,11 @@ public class CreatePostPresenter extends MvpPresenter<CreatePostView> {
     private CreatePostInteractor createPostInteractor;
 
     @Inject
-    public CreatePostPresenter(CreatePostInteractor createPostInteractor) {
+    CreatePostPresenter(CreatePostInteractor createPostInteractor) {
         this.createPostInteractor = createPostInteractor;
     }
 
-    public void uploadPost(String username, String title, String body){
+    void uploadPost(String username, String title, String body){
         boolean isCorrect = true;
         if (username == null || username.isEmpty()){
             getViewState().setUsernameError(ERROR_MESSAGE);
@@ -46,7 +46,7 @@ public class CreatePostPresenter extends MvpPresenter<CreatePostView> {
         }
     }
 
-    public void setText(String username, String title, String body){
+    void setText(String username, String title, String body){
         getViewState().setText(username, title, body);
     }
 

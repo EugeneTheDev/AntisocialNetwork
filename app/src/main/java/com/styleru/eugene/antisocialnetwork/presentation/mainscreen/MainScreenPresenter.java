@@ -16,17 +16,17 @@ public class MainScreenPresenter extends MvpPresenter<MainView> {
     private PostsInteractor postsInteractor;
 
     @Inject
-    public MainScreenPresenter(PostsInteractor postsInteractor) {
+    MainScreenPresenter(PostsInteractor postsInteractor) {
         this.postsInteractor = postsInteractor;
     }
 
-    public void requestPost(int postId){
+    void requestPost(int postId){
         postsInteractor.requestPosts(postId, getViewState()::addPost,
                 getViewState()::showErrorPopup);
 
     }
 
-    public void fillOnStart(){
+    void fillOnStart(){
         int goalSize = 20;
         for (int i = 0; i < goalSize; i++) {
             postsInteractor.requestPosts(SocNetworkRepository.MAX_ID - i,
@@ -34,11 +34,11 @@ public class MainScreenPresenter extends MvpPresenter<MainView> {
         }
     }
 
-    public void viewPostComments(Post post){
+    void viewPostComments(Post post){
         getViewState().viewPostComments(post);
     }
 
-    public void hideProgressBar(){
+    void hideProgressBar(){
         getViewState().setProgressVisibility(false);
     }
 

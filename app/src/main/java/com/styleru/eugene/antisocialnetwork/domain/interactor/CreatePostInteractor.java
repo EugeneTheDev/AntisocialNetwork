@@ -3,9 +3,9 @@ package com.styleru.eugene.antisocialnetwork.domain.interactor;
 
 import com.styleru.eugene.antisocialnetwork.domain.entity.Post;
 import com.styleru.eugene.antisocialnetwork.domain.entity.User;
+import com.styleru.eugene.antisocialnetwork.domain.interactor.funcinterfaces.Result;
 import com.styleru.eugene.antisocialnetwork.domain.repository.ISocNetworkRepository;
-import com.styleru.eugene.antisocialnetwork.presentation.funcinterfaces.Failure;
-import com.styleru.eugene.antisocialnetwork.presentation.funcinterfaces.Success;
+import com.styleru.eugene.antisocialnetwork.domain.interactor.funcinterfaces.Failure;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -16,21 +16,21 @@ public class CreatePostInteractor {
     private ISocNetworkRepository socNetworkRepository;
 
     @Inject
-    public CreatePostInteractor(ISocNetworkRepository socNetworkRepository) {
+    CreatePostInteractor(ISocNetworkRepository socNetworkRepository) {
         this.socNetworkRepository = socNetworkRepository;
     }
 
-    public void uploadPost(String username, String title, String body, Success<Post> success, Failure failure){
+    public void uploadPost(String username, String title, String body, Result<Post> result, Failure failure){
         socNetworkRepository.requestUserByUsername(username, (user)->{
-            if (user == null) success.onSuccess(null);
-            else finishUpload(user, title, body, success, failure);
+            if (user == null) result.onResult(null);
+            else finishUpload(user, title, body, result, failure);
         }, failure);
     }
 
-    private void finishUpload(User user, String title, String body, Success<Post> success, Failure failure){
+    private void finishUpload(User user, String title, String body, Result<Post> result, Failure failure){
         socNetworkRepository.uploadPost(title, body, user.getId(), (post)->{
             post.setUser(user);
-            success.onSuccess(post);
+            result.onResult(post);
         }, failure);
     }
 

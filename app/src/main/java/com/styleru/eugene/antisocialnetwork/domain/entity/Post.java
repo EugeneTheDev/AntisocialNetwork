@@ -1,6 +1,5 @@
 package com.styleru.eugene.antisocialnetwork.domain.entity;
 
-import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Parcel;
 
@@ -9,16 +8,12 @@ import java.util.Objects;
 @Parcel
 public class Post {
 
-    @SerializedName("userId")
     private int userId;
 
-    @SerializedName("id")
     private int id;
 
-    @SerializedName("title")
     private String title;
 
-    @SerializedName("body")
     private String body;
 
     private User user;
@@ -77,7 +72,6 @@ public class Post {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(getUserId(), getId(), getTitle(), getBody(), getUser());
     }
 }

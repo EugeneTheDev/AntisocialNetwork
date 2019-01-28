@@ -1,22 +1,16 @@
 package com.styleru.eugene.antisocialnetwork.domain.entity;
 
-import com.google.gson.annotations.SerializedName;
 
 public class Comment {
 
-    @SerializedName("id")
     private int id;
 
-    @SerializedName("postId")
     private int postId;
 
-    @SerializedName("name")
     private String name;
 
-    @SerializedName("email")
     private String email;
 
-    @SerializedName("body")
     private String body;
 
     public int getId() {

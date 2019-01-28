@@ -1,4 +1,4 @@
-package com.styleru.eugene.antisocialnetwork.presentation.funcinterfaces;
+package com.styleru.eugene.antisocialnetwork.domain.interactor.funcinterfaces;
 
 @FunctionalInterface
 public interface Failure {

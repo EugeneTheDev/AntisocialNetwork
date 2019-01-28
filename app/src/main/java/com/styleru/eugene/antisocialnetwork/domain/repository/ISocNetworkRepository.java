@@ -4,7 +4,7 @@ import com.styleru.eugene.antisocialnetwork.domain.entity.Comment;
 import com.styleru.eugene.antisocialnetwork.domain.entity.Post;
 import com.styleru.eugene.antisocialnetwork.domain.entity.User;
 import com.styleru.eugene.antisocialnetwork.domain.interactor.funcinterfaces.Result;
-import com.styleru.eugene.antisocialnetwork.presentation.funcinterfaces.Failure;
+import com.styleru.eugene.antisocialnetwork.domain.interactor.funcinterfaces.Failure;
 
 import java.util.List;
 

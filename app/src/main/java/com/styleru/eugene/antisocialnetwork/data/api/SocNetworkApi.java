@@ -28,10 +28,10 @@ public interface SocNetworkApi {
     @GET("users")
     Call<List<User>> getUserByUsername(@Query("username") String username);
 
-    @GET("/comments")
+    @GET("comments")
     Call<List<Comment>> getComments(@Query("postId") int postId);
 
-    @POST("/posts")
+    @POST("posts")
     @FormUrlEncoded
     Call<Post> uploadPost(@Field("title") String title, @Field("body") String body,
                           @Field("userId") int userId);

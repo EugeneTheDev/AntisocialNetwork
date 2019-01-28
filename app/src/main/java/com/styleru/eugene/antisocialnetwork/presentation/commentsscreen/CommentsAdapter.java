@@ -29,18 +29,18 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private final int VIEW_TYPE_POST = 0, VIEW_TYPE_COMMENT = 1;
 
     @Inject
-    public CommentsAdapter(CommentsScreenPresenter commentsScreenPresenter) {
+    CommentsAdapter(CommentsScreenPresenter commentsScreenPresenter) {
         comments = new ArrayList<>();
         this.commentsScreenPresenter = commentsScreenPresenter;
     }
 
-    public void setComments(List<Comment> comments){
+    void setComments(List<Comment> comments){
         this.comments = comments;
         commentsScreenPresenter.hideProgressBar();
         notifyDataSetChanged();
     }
 
-    public void clearComments(){
+    void clearComments(){
         comments.clear();
     }
 
@@ -48,7 +48,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.post = post;
     }
 
-    public boolean checkPost(Post post){
+    boolean checkPost(Post post){
         return this.post != null && this.post.equals(post);
     }
 
@@ -114,7 +114,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         @BindView(R.id.post_text)
         TextView postText;
 
-        public PostViewHolder(@NonNull View itemView) {
+        PostViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
@@ -130,7 +130,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         @BindView(R.id.comment_text)
         TextView text;
 
-        public CommentViewHolder(@NonNull View itemView) {
+        CommentViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

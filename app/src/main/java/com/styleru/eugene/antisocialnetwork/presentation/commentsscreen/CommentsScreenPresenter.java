@@ -14,20 +14,20 @@ public class CommentsScreenPresenter extends MvpPresenter<CommentsView> {
     private CommentsInteractor commentsInteractor;
 
     @Inject
-    public CommentsScreenPresenter(CommentsInteractor commentsInteractor) {
+    CommentsScreenPresenter(CommentsInteractor commentsInteractor) {
         this.commentsInteractor = commentsInteractor;
     }
 
-    public void requestComments(int postId){
+    void requestComments(int postId){
         commentsInteractor.requestComments(postId, getViewState()::setComments,
                 getViewState()::showErrorPopup);
     }
 
-    public void hideProgressBar(){
+    void hideProgressBar(){
         getViewState().setProgressVisibility(false);
     }
 
-    public void showProgressBar(){
+    void showProgressBar(){
         getViewState().setProgressVisibility(true);
     }
 }

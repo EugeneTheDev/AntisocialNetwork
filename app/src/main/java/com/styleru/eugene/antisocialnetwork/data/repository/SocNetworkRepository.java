@@ -7,7 +7,7 @@ import com.styleru.eugene.antisocialnetwork.domain.entity.Post;
 import com.styleru.eugene.antisocialnetwork.domain.entity.User;
 import com.styleru.eugene.antisocialnetwork.domain.interactor.funcinterfaces.Result;
 import com.styleru.eugene.antisocialnetwork.domain.repository.ISocNetworkRepository;
-import com.styleru.eugene.antisocialnetwork.presentation.funcinterfaces.Failure;
+import com.styleru.eugene.antisocialnetwork.domain.interactor.funcinterfaces.Failure;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class SocNetworkRepository implements ISocNetworkRepository {
     public static final int MAX_ID = 100;
 
     @Inject
-    public SocNetworkRepository(SocNetworkApi socNetworkApi) {
+    SocNetworkRepository(SocNetworkApi socNetworkApi) {
         this.socNetworkApi = socNetworkApi;
     }
 

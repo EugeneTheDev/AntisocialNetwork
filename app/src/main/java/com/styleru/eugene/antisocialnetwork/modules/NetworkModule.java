@@ -16,16 +16,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class NetworkModule {
 
     @Provides
-    ISocNetworkRepository provideISocNetworkRepository(){
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
-        Retrofit retrofit = new Retrofit.Builder()
+    SocNetworkApi provideSocNetworkRepository(Gson gson){
+         return new Retrofit.Builder()
                 .baseUrl(SocNetworkApi.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
+                .build()
+                .create(SocNetworkApi.class);
 
-        return new SocNetworkRepository(retrofit.create(SocNetworkApi.class));
+    }
+
+    @Provides
+    Gson provideGson(){
+        return new GsonBuilder()
+                .setLenient()
+                .create();
     }
 }

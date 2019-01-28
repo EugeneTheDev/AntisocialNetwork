@@ -29,13 +29,13 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     private final int VISIBILITY_THRESHOLD = 5;
 
     @Inject
-    public PostsAdapter(MainScreenPresenter mainScreenPresenter) {
+    PostsAdapter(MainScreenPresenter mainScreenPresenter) {
         this.posts = new ArrayList<>();
         this.mainScreenPresenter = mainScreenPresenter;
 
     }
 
-    public void addPost(Post newPost){
+    void addPost(Post newPost){
         if (newPost.getId() == posts.get(posts.size() - 1).getId() - 1) {
             posts.add(newPost);
             notifyItemInserted(posts.size() - 1);
@@ -46,7 +46,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
     }
 
-    public void fillOnStart(Post post, int goalSize){
+    void fillOnStart(Post post, int goalSize){
         posts.add(post);
         if (posts.size() == goalSize){
             Collections.sort(posts, (el1, el2)->el2.getId() - el1.getId());

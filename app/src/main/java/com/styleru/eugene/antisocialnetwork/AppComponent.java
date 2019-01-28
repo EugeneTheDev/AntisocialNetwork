@@ -3,6 +3,7 @@ package com.styleru.eugene.antisocialnetwork;
 import android.content.Context;
 
 import com.styleru.eugene.antisocialnetwork.modules.NetworkModule;
+import com.styleru.eugene.antisocialnetwork.modules.RepositoryModule;
 import com.styleru.eugene.antisocialnetwork.presentation.commentsscreen.CommentsActivity;
 import com.styleru.eugene.antisocialnetwork.presentation.createpost.CreatePostActivity;
 import com.styleru.eugene.antisocialnetwork.presentation.mainscreen.MainActivity;
@@ -14,7 +15,7 @@ import dagger.BindsInstance;
 import dagger.Component;
 
 @Singleton
-@Component(modules = {NetworkModule.class})
+@Component(modules = {NetworkModule.class, RepositoryModule.class})
 public interface AppComponent {
 
     void inject(MainActivity mainActivity);

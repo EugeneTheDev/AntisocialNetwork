@@ -8,16 +8,13 @@ import java.util.Objects;
 
 @Parcel
 public class User {
-    @SerializedName("id")
+
     private int id;
 
-    @SerializedName("name")
     private String name;
 
-    @SerializedName("username")
     private String username;
 
-    @SerializedName("email")
     private String email;
 
     public int getId() {
