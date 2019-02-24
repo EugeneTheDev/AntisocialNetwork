@@ -1,4 +1,4 @@
-package com.styleru.eugene.antisocialnetwork.domain.interactor.funcinterfaces;
+package com.styleru.eugene.antisocialnetwork.domain.callbacks;
 
 
 @FunctionalInterface

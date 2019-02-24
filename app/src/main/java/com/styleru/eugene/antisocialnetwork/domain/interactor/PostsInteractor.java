@@ -1,9 +1,11 @@
 package com.styleru.eugene.antisocialnetwork.domain.interactor;
 
 import com.styleru.eugene.antisocialnetwork.domain.entity.Post;
-import com.styleru.eugene.antisocialnetwork.domain.interactor.funcinterfaces.Result;
+import com.styleru.eugene.antisocialnetwork.domain.callbacks.Result;
 import com.styleru.eugene.antisocialnetwork.domain.repository.ISocNetworkRepository;
-import com.styleru.eugene.antisocialnetwork.domain.interactor.funcinterfaces.Failure;
+import com.styleru.eugene.antisocialnetwork.domain.callbacks.Failure;
+
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -18,16 +20,7 @@ public class PostsInteractor {
         this.socNetworkRepository = socNetworkRepository;
     }
 
-    public void requestPosts(int postId, Result<Post> result, Failure failure){
-        socNetworkRepository.requestPost(postId,
-                (post)->addUserToPost(post.getUserId(), post, result, failure), failure);
-    }
-
-    private void addUserToPost(int userId, Post post, Result<Post> result, Failure failure){
-        socNetworkRepository.requestUser(userId, (user)->{
-            post.setUser(user);
-            result.onResult(post);
-        }, failure);
-
+    public void requestPosts(Result<List<Post>> result, Failure failure){
+        socNetworkRepository.requestPosts(result, failure);
     }
 }

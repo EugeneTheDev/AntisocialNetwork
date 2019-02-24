@@ -21,6 +21,8 @@ import com.styleru.eugene.antisocialnetwork.presentation.createpost.CreatePostAc
 
 import org.parceler.Parcels;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -46,7 +48,6 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     @InjectPresenter
     MainScreenPresenter mainScreenPresenter;
 
-    @Inject
     PostsAdapter postsAdapter;
 
     @ProvidePresenter
@@ -71,9 +72,10 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
                     btnNewPost.show();
             }
         });
+        postsAdapter = new PostsAdapter(mainScreenPresenter::onPostClicked);
         recyclerView.setAdapter(postsAdapter);
-        if (postsAdapter.getItemCount() == 0) mainScreenPresenter.fillOnStart();
-
+        mainScreenPresenter.setErrorMessage(getResources().getString(R.string.internet_error_message));
+        mainScreenPresenter.onStart();
     }
 
     @OnClick(R.id.btn_new_post)
@@ -101,15 +103,15 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     }
 
     @Override
-    public void viewPostComments(Post post) {
+    public void showPostComments(Post post) {
         Intent intent = new Intent(getApplicationContext(), CommentsActivity.class);
         intent.putExtra(POST_KEY, Parcels.wrap(post));
         startActivity(intent);
     }
 
     @Override
-    public void fillOnStart(Post post, int goalSize) {
-        postsAdapter.fillOnStart(post, goalSize);
+    public void addPosts(List<Post> posts) {
+        postsAdapter.addPosts(posts);
     }
 
     @Override

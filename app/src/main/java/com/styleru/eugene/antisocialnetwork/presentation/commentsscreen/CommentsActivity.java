@@ -36,7 +36,6 @@ public class CommentsActivity extends MvpAppCompatActivity implements CommentsVi
     @InjectPresenter
     CommentsScreenPresenter commentsScreenPresenter;
 
-    @Inject
     CommentsAdapter commentsAdapter;
 
 
@@ -53,19 +52,21 @@ public class CommentsActivity extends MvpAppCompatActivity implements CommentsVi
         ButterKnife.bind(this);
         progressBar.setIndeterminate(true);
         Post post = Parcels.unwrap(getIntent().getParcelableExtra(MainActivity.POST_KEY));
+        commentsAdapter = new CommentsAdapter();
         recyclerView.setAdapter(commentsAdapter);
-        if (!commentsAdapter.checkPost(post)) {
-            commentsScreenPresenter.showProgressBar();
-            commentsAdapter.clearComments();
-            commentsAdapter.setPost(post);
-            commentsScreenPresenter.requestComments(post.getId());
-        }
+        commentsScreenPresenter.setErrorMessage(getResources().getString(R.string.internet_error_message));
+        commentsScreenPresenter.onStart(post);
 
     }
 
     @Override
     public void setComments(List<Comment> comments) {
         commentsAdapter.setComments(comments);
+    }
+
+    @Override
+    public void setPost(Post post) {
+        commentsAdapter.setPost(post);
     }
 
     @Override

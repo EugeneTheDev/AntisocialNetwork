@@ -19,8 +19,8 @@ public interface SocNetworkApi {
 
     String BASE_URL = "http://jsonplaceholder.typicode.com/";
 
-    @GET("posts/{id}")
-    Call<Post> getPost(@Path("id") int postId);
+    @GET("posts")
+    Call<List<Post>> getPosts();
 
     @GET("users/{id}")
     Call<User> getUser(@Path("id") int userId);

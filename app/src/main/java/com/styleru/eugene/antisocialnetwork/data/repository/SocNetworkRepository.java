@@ -2,26 +2,27 @@ package com.styleru.eugene.antisocialnetwork.data.repository;
 
 
 import com.styleru.eugene.antisocialnetwork.data.api.SocNetworkApi;
+import com.styleru.eugene.antisocialnetwork.domain.callbacks.ErrorType;
 import com.styleru.eugene.antisocialnetwork.domain.entity.Comment;
 import com.styleru.eugene.antisocialnetwork.domain.entity.Post;
 import com.styleru.eugene.antisocialnetwork.domain.entity.User;
-import com.styleru.eugene.antisocialnetwork.domain.interactor.funcinterfaces.Result;
+import com.styleru.eugene.antisocialnetwork.domain.callbacks.Result;
 import com.styleru.eugene.antisocialnetwork.domain.repository.ISocNetworkRepository;
-import com.styleru.eugene.antisocialnetwork.domain.interactor.funcinterfaces.Failure;
+import com.styleru.eugene.antisocialnetwork.domain.callbacks.Failure;
 
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+@Singleton
 public class SocNetworkRepository implements ISocNetworkRepository {
 
     private SocNetworkApi socNetworkApi;
-    private final String ERROR_MESSAGE = "No internet connection!";
-    public static final int MAX_ID = 100;
 
     @Inject
     SocNetworkRepository(SocNetworkApi socNetworkApi) {
@@ -29,16 +30,16 @@ public class SocNetworkRepository implements ISocNetworkRepository {
     }
 
     @Override
-    public void requestPost(int postId, Result<Post> result, Failure failure) {
-        socNetworkApi.getPost(postId).enqueue(new Callback<Post>() {
+    public void requestPosts(Result<List<Post>> result, Failure failure) {
+        socNetworkApi.getPosts().enqueue(new Callback<List<Post>>() {
             @Override
-            public void onResponse(Call<Post> call, Response<Post> response) {
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                 if (response.body() != null) result.onResult(response.body());
             }
 
             @Override
-            public void onFailure(Call<Post> call, Throwable t) {
-                failure.onFailure(ERROR_MESSAGE);
+            public void onFailure(Call<List<Post>> call, Throwable t) {
+                failure.onFailure(ErrorType.INTERNET);
             }
         });
     }
@@ -53,7 +54,7 @@ public class SocNetworkRepository implements ISocNetworkRepository {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                failure.onFailure(ERROR_MESSAGE);
+                failure.onFailure(ErrorType.INTERNET);
             }
         });
     }
@@ -63,12 +64,13 @@ public class SocNetworkRepository implements ISocNetworkRepository {
         socNetworkApi.getUserByUsername(username).enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                result.onResult(response.body().isEmpty() ? null : response.body().get(0));
+                if(!response.body().isEmpty()) result.onResult(response.body().get(0));
+                else failure.onFailure(ErrorType.NOT_FOND);
             }
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
-                failure.onFailure(ERROR_MESSAGE);
+                failure.onFailure(ErrorType.INTERNET);
             }
         });
     }
@@ -84,7 +86,7 @@ public class SocNetworkRepository implements ISocNetworkRepository {
 
             @Override
             public void onFailure(Call<List<Comment>> call, Throwable t) {
-                failure.onFailure(ERROR_MESSAGE);
+                failure.onFailure(ErrorType.INTERNET);
             }
         });
     }
@@ -99,7 +101,7 @@ public class SocNetworkRepository implements ISocNetworkRepository {
 
             @Override
             public void onFailure(Call<Post> call, Throwable t) {
-                failure.onFailure(ERROR_MESSAGE);
+                failure.onFailure(ErrorType.INTERNET);
             }
         });
     }

@@ -9,11 +9,11 @@ import com.styleru.eugene.antisocialnetwork.domain.entity.Post;
 
 public interface CreatePostView extends MvpView {
 
+    @StateStrategyType(AddToEndSingleStrategy.class)
+    void clearFields();
+
     @StateStrategyType(OneExecutionStateStrategy.class)
     void showErrorPopup(String message);
-
-    @StateStrategyType(AddToEndSingleStrategy.class)
-    void setInputType(int inputType);
 
     @StateStrategyType(AddToEndSingleStrategy.class)
     void replaceButtonWithLoader(boolean isButtonVisible);
@@ -27,14 +27,9 @@ public interface CreatePostView extends MvpView {
     @StateStrategyType(OneExecutionStateStrategy.class)
     void setBodyError(String error);
 
-    @StateStrategyType(AddToEndSingleStrategy.class)
-    void setText(String username, String title, String body);
-
     @StateStrategyType(OneExecutionStateStrategy.class)
     void result(Post post);
 
-    @StateStrategyType(OneExecutionStateStrategy.class)
-    void finish();
 
 
 }

@@ -8,70 +8,31 @@ import java.util.Objects;
 @Parcel
 public class Post {
 
-    private int userId;
+    public int userId;
 
-    private int id;
+    public int id;
 
-    private String title;
+    public String title;
 
-    private String body;
+    public String body;
 
-    private User user;
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+    public User user;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Post)) return false;
         Post post = (Post) o;
-        return getUserId() == post.getUserId() &&
-                getId() == post.getId() &&
-                Objects.equals(getTitle(), post.getTitle()) &&
-                Objects.equals(getBody(), post.getBody()) &&
-                Objects.equals(getUser(), post.getUser());
+        return userId == post.userId &&
+                id == post.id &&
+                Objects.equals(title, post.title) &&
+                Objects.equals(body, post.body) &&
+                Objects.equals(user, post.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUserId(), getId(), getTitle(), getBody(), getUser());
+
+        return Objects.hash(userId, id, title, body, user);
     }
 }

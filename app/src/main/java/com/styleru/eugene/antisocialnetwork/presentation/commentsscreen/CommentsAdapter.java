@@ -15,41 +15,26 @@ import com.styleru.eugene.antisocialnetwork.domain.entity.User;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-@Singleton
 public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Comment> comments;
     private Post post;
-    private CommentsScreenPresenter commentsScreenPresenter;
     private final int VIEW_TYPE_POST = 0, VIEW_TYPE_COMMENT = 1;
 
-    @Inject
-    CommentsAdapter(CommentsScreenPresenter commentsScreenPresenter) {
+    CommentsAdapter() {
         comments = new ArrayList<>();
-        this.commentsScreenPresenter = commentsScreenPresenter;
     }
 
     void setComments(List<Comment> comments){
         this.comments = comments;
-        commentsScreenPresenter.hideProgressBar();
         notifyDataSetChanged();
-    }
-
-    void clearComments(){
-        comments.clear();
     }
 
     public void setPost(Post post){
         this.post = post;
-    }
-
-    boolean checkPost(Post post){
-        return this.post != null && this.post.equals(post);
+        notifyItemChanged(0);
     }
 
     @Override
@@ -63,7 +48,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         switch (viewType) {
             case VIEW_TYPE_POST:
                 View vPost = LayoutInflater.from(viewGroup.getContext())
-                        .inflate(R.layout.item_post,viewGroup,false);
+                        .inflate(R.layout.item_post_with_author,viewGroup,false);
                 return new PostViewHolder(vPost);
             default:
                 View vComment = LayoutInflater.from(viewGroup.getContext())
@@ -78,19 +63,19 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         switch (viewHolder.getItemViewType()) {
             case VIEW_TYPE_POST:
                 PostViewHolder postViewHolder = (PostViewHolder) viewHolder;
-                User user = post.getUser();
-                postViewHolder.authorName.setText(String.format("%s (%s)", user.getName(), user.getUsername()));
-                postViewHolder.authorEmail.setText(user.getEmail());
-                postViewHolder.postTitle.setText(post.getTitle());
-                postViewHolder.postText.setText(post.getBody());
+                User user = post.user;
+                postViewHolder.authorName.setText(String.format("%s (%s)", user.name, user.username));
+                postViewHolder.authorEmail.setText(user.email);
+                postViewHolder.postTitle.setText(post.title);
+                postViewHolder.postText.setText(post.body);
                 break;
 
             case VIEW_TYPE_COMMENT:
                 CommentViewHolder commentViewHolder = (CommentViewHolder) viewHolder;
                 Comment comment = comments.get(i - 1);
-                commentViewHolder.authorName.setText(comment.getName());
-                commentViewHolder.authorEmail.setText(comment.getEmail());
-                commentViewHolder.text.setText(comment.getBody());
+                commentViewHolder.authorName.setText(comment.name);
+                commentViewHolder.authorEmail.setText(comment.email);
+                commentViewHolder.text.setText(comment.body);
                 break;
         }
 
@@ -98,7 +83,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
-        return comments.size() + 1;
+        return post == null? 0 : comments.size() + 1;
     }
 
     class PostViewHolder extends RecyclerView.ViewHolder {
@@ -108,10 +93,10 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         @BindView(R.id.post_author_email)
         TextView authorEmail;
 
-        @BindView(R.id.post_title)
+        @BindView(R.id.post_with_author_title)
         TextView postTitle;
 
-        @BindView(R.id.post_text)
+        @BindView(R.id.post_with_author_text)
         TextView postText;
 
         PostViewHolder(@NonNull View itemView) {

@@ -59,43 +59,24 @@ public class CreatePostActivity extends MvpAppCompatActivity implements CreatePo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
         ButterKnife.bind(this);
+        createPostPresenter.setErrorMessages(getResources().getString(R.string.internet_error_message),
+                getResources().getString(R.string.not_found_error_message));
         progressBar.setIndeterminate(true);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        createPostPresenter.setText(usernameInput.getText().toString().trim(),
-                titleInput.getText().toString().trim(), bodyInput.getText().toString().trim());
-    }
 
     @Override
     public void result(Post post) {
-        createPostPresenter.setText("", "", "");
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.putExtra(MainActivity.POST_KEY, Parcels.wrap(post));
         setResult(RESULT_OK, intent);
         finish();
     }
 
-    @Override
-    public void finish() {
-        createPostPresenter.setText(usernameInput.getText().toString().trim(),
-                titleInput.getText().toString().trim(), bodyInput.getText().toString().trim());
-        super.finish();
-    }
-
     @OnClick(R.id.btn_post)
     void onClickPost(){
-        createPostPresenter.uploadPost(usernameInput.getText().toString().trim(),
+        createPostPresenter.onClickPost(usernameInput.getText().toString().trim(),
                 titleInput.getText().toString().trim(), bodyInput.getText().toString().trim());
-    }
-
-    @Override
-    public void setInputType(int inputType) {
-        ViewCollections.set(Arrays.asList(usernameInput, titleInput, bodyInput),
-                (view, value, index)->view.setInputType(value), inputType);
-
     }
 
     @Override
@@ -108,13 +89,6 @@ public class CreatePostActivity extends MvpAppCompatActivity implements CreatePo
             btnPost.setVisibility(View.GONE);
 
         }
-    }
-
-    @Override
-    public void setText(String username, String title, String body) {
-        usernameInput.setText(username);
-        titleInput.setText(title);
-        bodyInput.setText(body);
     }
 
     @Override
@@ -135,5 +109,11 @@ public class CreatePostActivity extends MvpAppCompatActivity implements CreatePo
     @Override
     public void setBodyError(String error) {
         bodyInput.setError(error);
+    }
+
+    @Override
+    public void clearFields() {
+        ViewCollections.run(Arrays.asList(usernameInput, titleInput, bodyInput),
+                (view, index) -> view.setText(""));
     }
 }

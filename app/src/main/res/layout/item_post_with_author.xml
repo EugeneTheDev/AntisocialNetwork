@@ -18,7 +18,27 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/post_title"
+            android:id="@+id/post_author_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/post_margin"
+            android:paddingEnd="@dimen/post_margin"
+            android:textAppearance="@style/AuthorTextStyle"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Clementine Bauch (Samantha)"/>
+
+        <TextView
+            android:id="@+id/post_author_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/post_margin"
+            android:paddingEnd="@dimen/post_margin"
+            android:textAppearance="@style/AuthorTextStyle"
+            app:layout_constraintTop_toBottomOf="@id/post_author_name"
+            tools:text="Nathan@yesenia.net"/>
+
+        <TextView
+            android:id="@+id/post_with_author_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/post_title_padding"
@@ -30,12 +50,12 @@
             tools:text="Title"/>
 
         <TextView
-            android:id="@+id/post_text"
+            android:id="@+id/post_with_author_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/post_margin"
             android:textAppearance="@style/TextStyle"
-            app:layout_constraintTop_toBottomOf="@id/post_title"
+            app:layout_constraintTop_toBottomOf="@id/post_with_author_title"
             tools:text="Hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"/>
 
     </android.support.constraint.ConstraintLayout>

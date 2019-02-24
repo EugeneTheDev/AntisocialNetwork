@@ -9,4 +9,7 @@
     <string name="input_body_hint">Body</string>
 
     <string name="btn_post">Post</string>
+
+    <string name="internet_error_message">No internet connection!</string>
+    <string name="not_found_error_message">No user with such username!</string>
 </resources>
